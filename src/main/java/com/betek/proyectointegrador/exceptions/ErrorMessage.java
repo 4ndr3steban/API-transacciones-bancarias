@@ -6,8 +6,11 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum ErrorMessage {
-    BAD_REQUEST(400, "Bad Request", "mensaje 1"),
-    INTERNAL_ERROR(500, "Internal Error", "mensaje 2");
+    PRODUCT_NOT_FOUND(400, "Bad Request", "Account o pocket not founded"),
+    PARAMETER_NOT_FOUND(400, "Bad Request", "Needed parameter not found"),
+    USER_NOT_FOUND(400, "Bad Request", "User id not founded"),
+    USER_ALREADY_EXIST(400, "Bad Request", "User already exist"),
+    INTERNAL_ERROR(500, "Internal Error", "System internal error");
 
     private final Integer code;
     private final String title;

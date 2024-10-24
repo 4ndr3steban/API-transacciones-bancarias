@@ -6,6 +6,7 @@ import lombok.*;
 @Entity(name = "POCKETS")
 @Data
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)

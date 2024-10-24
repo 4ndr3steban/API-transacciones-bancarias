@@ -10,10 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class CreditAccountResponseDto {
+public class DepositAccountDto {
 
-    @JsonProperty("account_number")
-    private Double accountNumber;
-    @JsonProperty("new_amount")
-    private Double newAmount;
+    @JsonProperty("amount")
+    private Double amount;
 }

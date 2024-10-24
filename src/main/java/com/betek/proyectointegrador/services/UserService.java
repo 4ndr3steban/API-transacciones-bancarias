@@ -21,7 +21,7 @@ public class UserService {
     public UserDto createUser(UserDto userDto){
 
         if (userDto.getId()==null || userDto.getName()==null || userDto.getEmail()==null || userDto.getEmail()==null){
-            throw new BusinessException(ErrorMessage.BAD_REQUEST);
+            throw new BusinessException(ErrorMessage.PARAMETER_NOT_FOUND);
         }
 
         ArrayList<Integer> registeredIds = new ArrayList<>();
@@ -30,7 +30,7 @@ public class UserService {
                 .forEach(user -> registeredIds.add(user.getId()));
 
         if(registeredIds.contains(userDto.getId())){
-            throw new BusinessException(ErrorMessage.BAD_REQUEST);
+            throw new BusinessException(ErrorMessage.USER_ALREADY_EXIST);
         }
 
         User user = User.builder()
@@ -48,7 +48,7 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
 
         if(!user.isPresent()){
-            throw new BusinessException(ErrorMessage.BAD_REQUEST);
+            throw new BusinessException(ErrorMessage.USER_NOT_FOUND);
         }
 
         UserDto userDto = user.map(current -> UserDto.builder()
@@ -66,7 +66,7 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
 
         if(!user.isPresent()){
-            throw new BusinessException(ErrorMessage.BAD_REQUEST);
+            throw new BusinessException(ErrorMessage.USER_NOT_FOUND);
         }
 
         userRepository.deleteById(id);

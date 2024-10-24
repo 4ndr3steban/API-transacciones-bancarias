@@ -12,11 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder(toBuilder = true)
 public class PocketTransferResponseDto {
 
-    @JsonProperty("account_number")
-    private String accountNumber;
-    @JsonProperty("pocket_number")
-    private String pocketNumber;
-    @JsonProperty("new_amount")
-    private Double newAmount;
+    @JsonProperty("transfer_response")
+    private String transferResponse;
 
 }

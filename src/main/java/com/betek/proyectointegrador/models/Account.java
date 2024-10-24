@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "ACCOUNTS")
 @Data
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
@@ -28,5 +30,5 @@ public class Account {
     private User owner;
 
     @OneToMany(mappedBy = "parentAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private ArrayList<Pocket> pockets;
+    private List<Pocket> pockets = new ArrayList<>();
 }
