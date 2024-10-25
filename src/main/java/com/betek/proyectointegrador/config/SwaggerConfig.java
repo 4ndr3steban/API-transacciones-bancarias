@@ -14,10 +14,10 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI api(){
-        return new OpenAPI().info(new Info().title("Api REST FULL CRUD BASICO UTILIZANDO MAPS")
-                .version("1.0").contact(new Contact().name("Juan Perez").url("www.linkdink.com/juanPerez")
-                        .email("juan@gmailcom")).license(new License().url("www.google.com").name("Google"))
-                .description("Api encargada de gestionar usuarios tipo crud usando estructura de dato tipo map"));
+        return new OpenAPI().info(new Info().title("API REST FULL SIMULADOR DE TRANSACCIONES BANCARIOAS")
+                .version("1.0").contact(new Contact().name("Andres Monsalve").url("www.linkdink.com/andresmonsalvev")
+                        .email("andresmonv19@gmailcom"))
+                .description("Api encargada de simular transacciones bancarias basicas como crear cuentas, bolsillos y movimientos de dinero"));
     }
 
 }
