@@ -27,8 +27,8 @@ jobs:
       - name: Execute Gradle build
         run: gradle build
         env:
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_PORT: ${{ secrets.DB_PORT }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_HOST: ${{ POSTGRESQL_CONECCTION.DB_HOST }}
+          DB_PORT: ${{ POSTGRESQL_CONECCTION.DB_PORT }}
+          DB_NAME: ${{ POSTGRESQL_CONECCTION.DB_NAME }}
+          DB_USER: ${{ POSTGRESQL_CONECCTION.DB_USER }}
+          DB_PASSWORD: ${{ POSTGRESQL_CONECCTION.DB_PASSWORD }}
