@@ -1,0 +1,297 @@
+@startuml
+
+AccountController *--> AccountService
+
+AccountController *--> PocketService
+
+PocketController *--> PocketService
+
+UserController *--> UserService
+
+AccountService *--> AccountRepository
+
+AccountService *--> UserRepository
+
+PocketService *--> PocketRepository
+
+PocketService *--> AccountRepository
+
+UserService *--> userRepository
+
+AccountService ..> OpenAccountDto
+
+AccountService ..> OpenAccountResponseDto
+
+AccountService ..> AccountDto
+
+AccountService ..> DepositAccountDto
+
+AccountService ..> DepositAccountResponseDto
+
+AccountService ..> TransferDto
+
+AccountService ..> TransferResponseDto
+
+PocketService ..> PocketDto
+
+PocketService ..> CreatePocketDto
+
+PocketService ..> CreatePocketResponseDto
+
+PocketService ..> PocketTransferDto
+
+PocketService ..> PocketTransferResponseDto
+
+UserService ..> UserDto
+
+AccountService ..> Account
+
+AccountService ..> Pocket
+
+PocketService ..> Pocket
+
+userService ..> User
+
+
+
+class AccountController {
+    - final AccountService accountService;
+
+    - final PocketService pocketService;
+
+    + ResponseEntity<OpenAccountResponseDto> openAccount(@RequestBody OpenAccountDto openAccountDto)
+
+    + ResponseEntity<DepositAccountResponseDto> depositAccount(@PathVariable("account_number") String accountNumber, @RequestBody DepositAccountDto depositAccountDto)
+
+    + ResponseEntity<TransferResponseDto> transferAccount(@RequestBody TransferDto transferDto)
+
+    + ResponseEntity<AccountDto> getAccount(@PathVariable("account_number") String accountNumber)
+
+    + ResponseEntity<List<PocketDto>> getPockets(@PathVariable("account_number") String accountNumber)
+}
+
+class PocketController {
+
+    - final PocketService pocketService;
+
+    + ResponseEntity<CreatePocketResponseDto> openAccount(@RequestBody CreatePocketDto createPocketDto)
+
+    + ResponseEntity<PocketTransferResponseDto> pocketTransfer(@RequestBody PocketTransferDto pocketTransferDto)
+
+}
+
+class UserController {
+
+    - final UserService userService;
+
+    + ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto)
+
+}
+
+class CreatePocketDto {
+
+    - String accountNumber;
+
+    - String name;
+
+    - Double initialBalance;
+}
+
+class CreatePocketResponseDto {
+
+    - String accountNumber;
+
+    - String pocketNumber;
+
+    - Double initialBalance;
+
+}
+
+class OpenAccountDto {
+
+    - Integer ownerId;
+
+    - Double initialBalance;
+}
+
+class OpenAccountResponseDto {
+
+    - String accountNumber;
+
+    - Integer ownerId;
+
+    - Double initialBalance;
+}
+
+class DepositAccountDto {
+
+    - Double amount;
+}
+
+class DepositAccountResponseDto {
+
+    - String accountNumber;
+
+    - Double newAmount;
+}
+
+class PocketTransferDto {
+
+    - String accountNumber;
+
+    - String pocketNumber;
+
+    - Double amount;
+}
+
+class PocketTransferResponseDto {
+
+    - String transferResponse;
+
+}
+
+class TransferDto {
+
+    - String sourceAccountNumber;
+
+    - String destinationAccountNumber;
+
+    - Double amount;
+}
+
+class TransferResponseDto {
+
+    - String transferResult;
+
+}
+
+class AccountDto {
+
+    - String accountNumber;
+
+    - UserDto owner;
+
+    - Double balance;
+}
+
+class PocketDto {
+
+    - String name;
+
+    - String pocketNumber;
+
+    - Double amount;
+}
+
+class UserDto {
+
+    - Integer id;
+
+    - String name;
+
+    - String email;
+
+    - String address;
+}
+
+class Account {
+
+    - String accountNumber;
+
+    - Double balance;
+
+    - Integer ownerId;
+
+    - User owner;
+
+    - List<Pocket> pockets = new ArrayList<>();
+}
+
+class Pocket {
+
+    - PocketPrimaryKey pocketPrimaryKey;
+
+    - String name;
+
+    - Double balance;
+
+    - Account parentAccount;
+}
+
+class PocketPrimaryKey implements Serializable {
+
+    - String pocketNumber;
+
+    - String parentAccountNumber;
+}
+
+class User {
+
+    - Integer id;
+
+    - String name;
+
+    - String email;
+
+    - String address;
+
+    - List<Account> accounts = new ArrayList<>();
+}
+
+interface AccountRepository {
+
+}
+
+interface PocketRepository {
+    * long countByPocketPrimaryKey_ParentAccountNumber(String accountNumber);
+
+    * ArrayList<Pocket> findByPocketPrimaryKey_ParentAccountNumber(String accountNumber);
+
+    * Optional<Pocket> findByPocketPrimaryKey_PocketNumberAndPocketPrimaryKey_ParentAccountNumber(String pocketNumber, String ParentAccountNumber);
+}
+
+interface UserRepository {
+
+}
+
+class AccountService {
+
+    - final AccountRepository accountRepository;
+
+    - final UserRepository userRepository;
+
+    + OpenAccountResponseDto openAccount(OpenAccountDto openAccountDto)
+
+    + DepositAccountResponseDto depositAccount(String accountNumber, DepositAccountDto depositAccountDto)
+
+    + TransferResponseDto transfer(TransferDto transferDto)
+
+    + AccountDto getAccount(String accountNumber)
+}
+
+class PocketService {
+
+    - final PocketRepository pocketRepository;
+
+    - final AccountRepository accountRepository;
+
+    + CreatePocketResponseDto createPocket(CreatePocketDto createPocketDto)
+
+    + List<PocketDto> getPockets(String accountNumber)
+
+    + PocketTransferResponseDto pocketTransfer(PocketTransferDto pocketTransferDto)
+}
+
+class UserService {
+
+    - final UserRepository userRepository;
+
+    + UserDto createUser(UserDto userDto)
+
+    + UserDto getUser(Integer id)
+
+    + void deleteUser(Integer id)
+
+}
+
+@enduml
