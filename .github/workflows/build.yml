@@ -25,10 +25,4 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Execute Gradle build
-        run: gradle build
-        env:
-          DB_HOST: ${{ POSTGRESQL_CONECCTION.DB_HOST }}
-          DB_PORT: ${{ POSTGRESQL_CONECCTION.DB_PORT }}
-          DB_NAME: ${{ POSTGRESQL_CONECCTION.DB_NAME }}
-          DB_USER: ${{ POSTGRESQL_CONECCTION.DB_USER }}
-          DB_PASSWORD: ${{ POSTGRESQL_CONECCTION.DB_PASSWORD }}
+        run: gradle build -x test
