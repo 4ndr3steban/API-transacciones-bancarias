@@ -23,7 +23,8 @@ public class ProyectointegradorApplication {
 				@Override
 				public void addCorsMappings(CorsRegistry registry) {
 					registry.addMapping("/**")
-							.allowedMethods("HEAD", "GET", "POST");
+							.allowedOrigins("*")
+							.allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS");
 				}
 			};
 		}
