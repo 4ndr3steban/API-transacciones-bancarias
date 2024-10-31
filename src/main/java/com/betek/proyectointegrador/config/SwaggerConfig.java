@@ -21,10 +21,4 @@ public class SwaggerConfig {
                 .description("Api encargada de simular transacciones bancarias basicas como crear cuentas, bolsillos y movimientos de dinero"));
     }
 
-    @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .addServersItem(new Server().url("https://bubbly-quietude-production.up.railway.app/"));
-    }
-
 }
