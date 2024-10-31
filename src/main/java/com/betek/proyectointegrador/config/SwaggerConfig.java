@@ -18,7 +18,8 @@ public class SwaggerConfig {
         return new OpenAPI().info(new Info().title("API REST FULL SIMULADOR DE TRANSACCIONES BANCARIOAS")
                 .version("1.0").contact(new Contact().name("Andres Monsalve").url("www.linkdink.com/andresmonsalvev")
                         .email("andresmonv19@gmailcom"))
-                .description("Api encargada de simular transacciones bancarias basicas como crear cuentas, bolsillos y movimientos de dinero"));
+                .description("Api encargada de simular transacciones bancarias basicas como crear cuentas, bolsillos y movimientos de dinero"))
+                .addServersItem(new Server().url("https://bubbly-quietude-production.up.railway.app/"));
     }
 
 }
