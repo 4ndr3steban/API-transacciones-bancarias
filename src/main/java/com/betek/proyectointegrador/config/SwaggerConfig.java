@@ -5,6 +5,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,6 +19,12 @@ public class SwaggerConfig {
                 .version("1.0").contact(new Contact().name("Andres Monsalve").url("www.linkdink.com/andresmonsalvev")
                         .email("andresmonv19@gmailcom"))
                 .description("Api encargada de simular transacciones bancarias basicas como crear cuentas, bolsillos y movimientos de dinero"));
+    }
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .addServersItem(new Server().url("https://bubbly-quietude-production.up.railway.app/"));
     }
 
 }
